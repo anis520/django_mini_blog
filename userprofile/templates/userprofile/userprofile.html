@@ -1,0 +1,121 @@
+{% extends 'core/base.html' %}
+{% block msg %}
+
+{% if messages %}
+
+       {% for ms in messages  %}
+       
+       <div class="alert alert-{{ms.tags}} alert-dismissible fade show" role="alert">
+        {{ms}}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+           
+
+       
+       
+       {% endfor %}
+
+
+{% endif %}
+
+{% endblock msg %}
+{% block content %}
+
+   <div class=''>
+    {% comment %} <img style='height:40vh;object-fit:cover;' class='img w-100 rounded-3 ' src="https://wallpaperbat.com/img/137073-programming-hd-wallpaper-for-desktop-programacao.jpg" alt=""> {% endcomment %}
+     <div class='row mt-2 gap-2'>
+        <div class='col-md-4'>
+            <img  class='rounded border border-5 '  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTynBryvKzWaR8tUKSYDGuCmuY8adeV_NVyy5UFqNDdKnj8H24gozWr75-q0I6pqSTFYvg&usqp=CAU"  alt="">
+
+        </div>
+       <div class='col-md-6 bg-light p-5 rounded'>
+
+   <h4>My info</h4>
+    <p class='fw-bold'>Name : {{user.username}}</p>
+    <p class='fw-bold'>Email : {{user.email}}</p>
+    <a class='fw-bold btn btn-warning text-danger' href="{% url 'logout' %}">Logout <i class="fa-solid fa-right-from-bracket"></i></a> 
+ 
+  
+  </div>
+  
+  </div>
+</div>
+
+
+
+
+   <div class="mt-4">
+ 
+       
+       
+       <div class="container">
+         
+         
+               <h2>Home texts</h2>
+          
+
+               <a href="{% url 'addhome' %}" class='btn btn-primary mb-2'>Add new</a>
+       
+           {% comment %} <p>The .table-dark class adds a black background to the table:</p>             {% endcomment %}
+           <div class='bg-primary mb-1' style='height: 5px;'></div>
+  <table class="table table-dark">
+    <thead>
+      <tr>
+        <th style='width:10%;text-align:center;'>ID</th>
+        <th style='width: 25%;'>Title</th>
+        <th style='width: 50%;'>Text</th>
+        <th style='width: 15%;'>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+
+        {% for i in data %}
+        
+        
+        
+        <tr>
+            <td class='text-center'>{{i.id}}</td>
+            <td>{{i.title}}</td>
+            <td>{{i.text}}</td>
+            <td>
+               
+
+
+
+              <a href="{% url 'edit' i.id %}">
+                
+                <i class='fas fa-edit bg-warning px-3 py-2 rounded'></i>
+              </a>
+
+
+              {% if perms.home.delete_Homeost %}
+
+
+
+              <a href="{% url 'delete' i.id %}"> <i class='fas fa-trash bg-danger px-3 py-2 rounded'></i></a>
+
+              
+              {% endif %}
+
+               
+                
+            </td>
+        </tr>
+        {% endfor %}
+ 
+    </tbody>
+  </table>
+</div>
+   </div>
+
+
+
+
+{% endblock content %}
+
+
+
+
+
+
+
